@@ -265,14 +265,17 @@ import {
 } from "recharts";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import {
-  API_ENDPOINTS
+  API_ENDPOINTS,
+  GRID_DIMENSIONS,
 } from "@/lib/constants";
 
 export default function History() {
   // State hooks grouped logically
   const [searchParams] = useSearchParams();
-  const gridX = parseInt(searchParams.get("x") || "0");
-  const gridY = parseInt(searchParams.get("y") || "0");
+  const rawX = parseInt(searchParams.get("x") || "0", 10);
+  const rawY = parseInt(searchParams.get("y") || "0", 10);
+  const gridX = Number.isNaN(rawX) ? 0 : Math.max(0, Math.min(GRID_DIMENSIONS.COLS - 1, rawX));
+  const gridY = Number.isNaN(rawY) ? 0 : Math.max(0, Math.min(GRID_DIMENSIONS.ROWS - 1, rawY));
 
   const [selectedMetrics, setSelectedMetrics] = useState<string>("total");
   const [selectedDays, setSelectedDays] = useState<string[]>([...DAYS_OF_WEEK]);

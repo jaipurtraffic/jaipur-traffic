@@ -268,9 +268,7 @@ export default function Index() {
                 Error Loading Data
               </h2>
               <p className="text-sm text-muted-foreground">
-                {currentError?.message ||
-                  sustainedError?.message ||
-                  "Failed to load traffic data. Please try again later."}
+                Unable to load traffic data at this time. Please try again later.
               </p>
               <button
                 onClick={() => window.location.reload()}
